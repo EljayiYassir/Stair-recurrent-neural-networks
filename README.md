@@ -70,14 +70,14 @@ Options:
 
 
 #### The employed hyperparameters for the permuted sequential MNIST
-| Model (parameterization) | N   | LR                 | LR Orth            | $\alpha$ | $\delta$ | T decay   | A init        |
-|--------------------------|-----|--------------------|--------------------|----------|----------|-----------|---------------|
-| RNN                      | 512 | $10^{-4}$          |                    | 0.9      |          |           | Glorot Normal |
-| expRNN                   | 512 | $5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0.99     |          |           | Cayley        |
-| nnRNN                    | 512 | $2 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
-| sRNN                     | 512 | $5 \times 10^{-5}$ | $2 \times 10^{-4}$ | 0,99     |          |           | Random Orth   |
-| sRNN (exponential)       | 512 | $4.5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0,99   |          |           | Cayley        |
-| sRNN (non-normal)        | 512 | $3 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
+| Model (parameterization) | N   |  $\tilde{\rho_j}$ | LR                 | LR Orth            | $\alpha$ | $\delta$ | T decay   | A init        |
+|--------------------------|-----|-------------------|--------------------|--------------------|----------|----------|-----------|---------------|
+| RNN                      | 512 |                   | $10^{-4}$          |                    | 0.9      |          |           | Glorot Normal |
+| expRNN                   | 512 |                   | $5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0.99     |          |           | Cayley        |
+| nnRNN                    | 512 |                   | $2 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
+| sRNN                     | 512 |  alpha            | $5 \times 10^{-5}$ | $2 \times 10^{-4}$ | 0,99     |          |           | Random Orth   |
+| sRNN (exponential)       | 512 |  alpha            | $4.5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0,99   |          |           | Cayley        |
+| sRNN (non-normal)        | 512 |  n                | $3 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
 
 
 
@@ -109,50 +109,6 @@ Options:
 - optimizer : choice of optimizer between RMSprop and Adam
 - alpha : alpha value for optimizer (always RMSprop) 
 - betas : beta values for adam optimizer 
-
-
-\begin{table*}[htbp]
-  \centering
-  \caption{The employed hyperparameters for the character-level language modeling task}
-\resizebox{0.8\textwidth}{!}{
-    \begin{tabular}{lcccccccc}
-    \toprule
-    Model (parameterization) & N  & $\tilde{\rho_j}$   & LR    & LR Orth & $\alpha$ & $\delta$  & T decay & A init \\
-    \midrule
-    \multicolumn{9}{c}{Length 150} \\
-    \midrule
-    
-    |RNN   & 1024 &  & $10^{-5}$ &       & 0.9   &       &       & Glorot Normal \\
-
-    expRNN & 1024 &  & $5 \times 10^{-3}$ & $10^{-4}$ & 0.9   &       &       & Cayley \\
-
-    nnRNN & 1024 &  & $8 \times 10^{-4}$ & $8 \times 10^{-5}$ & 0.9   & 1 & $10^{-4}$ & Cayley \\
-
-    sRNN  & 1024 & n$^2$ & $3\times 10^{-4}$ &  $8 \times10^{-4}$     & 0.9   &       &       & Random Orth \\
-
-    sRNN (exponential) & 1024 & expn  & $4.5 \times 10^{-3}$ & $10^{-4}$ & 0.9   &       &       & Cayley \\
- 
-    sRNN (non-normal) & 1024 & alpha & $8.5 \times 10^{-4}$ & $8 \times 10^{-5}$ & 0.9   & $10^{-4}$ & $10^{-4}$ & Cayley \\
-    \midrule
-    \multicolumn{9}{c}{Length 300} \\
-    \midrule
-    RNN   & 1024 &  & $10^{-5}$ &       & 0.9   &       &       & Glorot Normal \\
-
-    expRNN & 1024 &  & $5 \times 10^{-3}$ & $10^{-4}$ & 0.9   &       &       & Cayley \\
-
-    nnRNN & 1024 &  & $8 \times 10^{-4}$ & $6 \times 10^{-5}$ & 0.9   & $10^{-4}$ & $10^{-4}$ & Cayley \\
-
-    sRNN  & 1024 & alpha & $2 \times 10^{-4}$ &   $8 \times 10^{-5}$    & 0.9   &       &       & Random Orth \\
-
-    sRNN (exponential) & 1024 & alpha & $6 \times 10^{-3}$ & $10^{-4}$ & 0.9   &       &       & Cayley \\
-    sRNN (non-normal) & 1024 & expn  & $2 \times 10^{-4}$ & $8 \times 10^{-5}$ & 0.9   & $1$ & $10^{-4}$ & Cayley \\
-    \bottomrule
-    \end{tabular}%
-    }
-  \label{tab:PTBHyper}%
-\end{table*}%
-
-
 
 #### The employed hyperparameters for the character-level language modeling task
 
@@ -202,12 +158,11 @@ Options:
 
 #### The employed hyperparameters for the copying memory task
 
-| Model (parameterization) | N   | LR                 | LR Orth   | $\alpha$ | $\delta$  | T decay   | A init        |
-|--------------------------|-----|--------------------|-----------|----------|-----------|-----------|---------------|
-| RNN                      | 128 | $10^{-3}$          |           | 0.9      |           |           | Glorot Normal |
-| RNN-Orth                 | 128 | $2 \times 10^{-4}$ |           | 0.99     |           |           | Random Orth   |
-| expRNN                   | 128 | $10^{-3}$          | $10^{-4}$ | 0.99     |           |           | Henaff        |
-| nnRNN                    | 128 | $5 \times 10^{-4}$ | $10^{-6}$ | 0.99     | $10^{-4}$ | $10^{-4}$ | Henaff        |
-| sRNN                     | 128 | $2 \times 10^{-4}$ |           | 0.99     |           |           | Random Orth   |
-| sRNN (exponontial)       | 128 | $10^{-3}$          | $10^{-4}$ | 0.99     |           |           | Henaff        |
-| sRNN (non-normal)        | 128 | $5 \times 10^{-4}$ | $10^{-6}$ | 0.99     | $10^{-4}$ | $10^{-4}$ | Henaff        |
+| Model (parameterization) | N   |   $\tilde{\rho_j}$ | LR                 | LR Orth   | $\alpha$ | $\delta$  | T decay   | A init        |
+|--------------------------|-----|--------------------|--------------------|-----------|----------|-----------|-----------|---------------|
+| RNN                      | 128 |                    | $10^{-3}$          |           | 0.9      |           |           | Glorot Normal |
+| expRNN                   | 128 |                    | $10^{-3}$          | $10^{-4}$ | 0.99     |           |           | Henaff        |
+| nnRNN                    | 128 |                    | $5 \times 10^{-4}$ | $10^{-6}$ | 0.99     | $10^{-4}$ | $10^{-4}$ | Henaff        |
+| sRNN                     | 128 |   expn             | $2 \times 10^{-4}$ |           | 0.99     |           |           | Random Orth   |
+| sRNN (exponontial)       | 128 |   expn             | $10^{-3}$          | $10^{-4}$ | 0.99     |           |           | Henaff        |
+| sRNN (non-normal)        | 128 |   alpha            | $5 \times 10^{-4}$ | $10^{-6}$ | 0.99     | $10^{-4}$ | $10^{-4}$ | Henaff        |
