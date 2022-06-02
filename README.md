@@ -3,7 +3,7 @@
 Code for the paper:
 
 **Stair Recurrent Neural Networks**<br>
- Submitted to Journal of Frontiers of computer science. 2022<br>
+ Submitted to Conference on Neural Information Processing Systems (NeurIPS), 2021<br>
 
 The code source is based on the implementations of [nnRNN](https://arxiv.org/abs/1905.12080) and  [expRNN](https://arxiv.org/abs/1901.08428)
 
@@ -15,6 +15,7 @@ The code source is based on the implementations of [nnRNN](https://arxiv.org/abs
 
 1. [task]_nvar.py for ```\rho_j``` in `expn`, `n^2`,  `n`, `log2n`, `logn`, `sqrtlogn`
 2. [task]_alpha.py for ```\rho_j``` == `\alpha_j`
+2. [task]_expalpha.py for exp-alpha activation 
 
 ## Training 
 
