@@ -68,16 +68,33 @@ Options:
 - Tdecay : weight decay on upper triangular matrix values
 - save_freq : frequency in epochs to save data and network
 
+\begin{tabular}{lcccccccc}
+    \toprule
+    Model (parameterization) & N & $\tilde{\rho_j}$ & LR    & LR Orth & $\alpha$ & $\delta$  & T decay & A init \\
+    \midrule
+    RNN   & 512 &  & $10^{-4}$ &       & 0.9   &       &       & Glorot Normal \\
+
+    expRNN & 512 &  & $5 \times 10^{-4}$ & $5 \times 10^{-5}$ & 0.99  &       &       & Cayley \\
+
+    nnRNN & 512 &  & $2 \times 10^{-4}$ & $2 \times 10^{-5}$ & 0.99  & 0.1   & $10^{-4}$ & Cayley \\
+
+    sRNN  & 512 & alpha & $5 \times 10^{-5}$ & $2 \times 10^{-4}$     & 0,99  &       &       & Random Orth \\
+
+    sRNN (exponential) & 512 & alpha & $4.5 \times 10^{-4}$ & $5 \times 10^{-5}$ & 0,99  &       &       & Cayley \\
+  
+    sRNN (non-normal) & 512 & n & $3 \times 10^{-4}$ & $2 \times 10^{-5}$ & 0.99  & 0.1   & $10^{-4}$ & Cayley \\
+    \bottomrule
+    \end{tabular}
+
 #### The employed hyperparameters for the permuted sequential MNIST
 | Model (parameterization) | N   | LR                 | LR Orth            | $\alpha$ | $\delta$ | T decay   | A init        |
 |--------------------------|-----|--------------------|--------------------|----------|----------|-----------|---------------|
 | RNN                      | 512 | $10^{-4}$          |                    | 0.9      |          |           | Glorot Normal |
-| RNN-Orth                 | 512 | $5 \times 10^{-5}$ |                    | 0.99     |          |           | Random Orth   |
 | expRNN                   | 512 | $5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0.99     |          |           | Cayley        |
 | nnRNN                    | 512 | $2 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
 | sRNN                     | 512 | $5 \times 10^{-5}$ |                    | 0,99     |          |           | Random Orth   |
-| sRNN (exponential)       | 512 | $5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0,99     |          |           | Cayley        |
-| sRNN (non-normal)        | 512 | $2 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
+| sRNN (exponential)       | 512 | $4.5 \times 10^{-4}$ | $5 \times 10^{-5}$ | 0,99     |          |           | Cayley        |
+| sRNN (non-normal)        | 512 | $3 \times 10^{-4}$ | $2 \times 10^{-5}$ | 0.99     | 0.1      | $10^{-4}$ | Cayley        |
 
 
 
